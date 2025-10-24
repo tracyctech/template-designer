@@ -11,8 +11,9 @@ app.use('/images', express.static('images'));
 if (!fs.existsSync('images')) fs.mkdirSync('images');
 
 // ALL YOUR FIELDS SUPPORTED
-app.post('/generate', async (req, res) => {  // Ensure route matches /generate
+app.post('/generate', async (req, res) => {
   try {
+    console.log('Request received:', req.body);  // Log input
     const { document = {}, elements = {} } = req.body;
     const { name_text = {}, content_text = {}, website_text = {} } = elements;
     
@@ -61,6 +62,7 @@ app.post('/generate', async (req, res) => {  // Ensure route matches /generate
         </style>
       </head>
       <body>
+        <div style="position:absolute; top:0; left:0; color:black; font-size:20px;">Test Visible</div>  <!-- Test element -->
         <div class="name_text">${name_text.text || ''}</div>
         <div class="content_text">${content_text.text || ''}</div>
         <div class="website_text">${website_text.text || ''}</div>
@@ -68,21 +70,24 @@ app.post('/generate', async (req, res) => {  // Ensure route matches /generate
       </html>
     `;
 
+    console.log('HTML generated');  // Log HTML creation
     // Launch Puppeteer with Render-compatible args
     const browser = await puppeteer.launch({
       args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
     });
+    console.log('Browser launched');  // Log launch
     const page = await browser.newPage();
     await page.setContent(html);
     await page.setViewport({ width: document.width || 1200, height: document.height || 628 });
-    const screenshot = await page.screenshot({ type: 'png' });
+    const screenshot = await page.screenshot({ type: 'png', fullPage: true });
+    console.log('Screenshot taken, size:', screenshot.length);  // Log screenshot size
     await browser.close();
 
     // Send PNG buffer directly
     res.setHeader('Content-Type', 'image/png');
     res.send(screenshot);
   } catch (error) {
-    console.error(error);
+    console.error('Error:', error);
     res.status(500).json({ error: error.message });
   }
 });

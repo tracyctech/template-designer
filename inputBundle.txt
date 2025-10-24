@@ -1,0 +1,29 @@
+[
+    {
+        "ca": null,
+        "qs": [],
+        "url": "https://template-designer-pa8q.onrender.com/generate",
+        "data": "{\r\n  \"document\": {\r\n    \"background_color\": \"#f0f0f0\"\r\n  },\r\n  \"elements\": {\r\n    \"name_text\": {\r\n      \"text\": \"CANNON CORE\",\r\n      \"x\": 30, \"y\": 200, \"width\": 694, \"height\": 50,\r\n      \"font_size\": 40, \"font_color\": \"#FFFFFF\", \"align\": \"Center\",\r\n      \"background_round_corner\": 0, \"background_padding\": 0\r\n    },\r\n    \"content_text\": {\r\n      \"text\": \"Small business miss up to 62% of incoming calls during peak hours!\",\r\n      \"x\": 476, \"y\": 43, \"width\": 600, \"height\": 200,\r\n      \"font_size\": 24, \"font_color\": \"#333333\"\r\n    },\r\n    \"website_text\": {\r\n      \"text\": \"cannoncore.com\",\r\n      \"x\": 600, \"y\": 806, \"width\": 250, \"height\": 30,\r\n      \"font_size\": 18, \"font_color\": \"#666666\"\r\n    }\r\n  }\r\n}",
+        "gzip": true,
+        "method": "post",
+        "headers": [
+            {
+                "name": "Content-Type",
+                "value": "application/json"
+            }
+        ],
+        "timeout": null,
+        "useMtls": false,
+        "authPass": null,
+        "authUser": null,
+        "bodyType": "raw",
+        "contentType": "application/json",
+        "serializeUrl": false,
+        "shareCookies": true,
+        "parseResponse": true,
+        "followRedirect": true,
+        "useQuerystring": false,
+        "followAllRedirects": true,
+        "rejectUnauthorized": true
+    }
+]
