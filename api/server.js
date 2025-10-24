@@ -11,18 +11,12 @@ app.use('/images', express.static('images'));
 if (!fs.existsSync('images')) fs.mkdirSync('images');
 
 // ALL YOUR FIELDS SUPPORTED
-app.post('/generate', async (req, res) => {
+app.post('/api/generate', async (req, res) => {  // Changed to /api/generate
   try {
-    const {
-      name_text = '',
-      content_text = '',
-      website_text = '',
-      document = { width: 1200, height: 628 },
-      background = { color: '#ffffff' },
-      // Add other fields as needed, e.g., name_text: { text, x, y, font_size, font_color }
-    } = req.body;
+    const { document = {}, elements = {} } = req.body;
+    const { name_text = {}, content_text = {}, website_text = {} } = elements;
     
-    // Build HTML template dynamically from data
+    // Build HTML template dynamically
     const html = `
       <!DOCTYPE html>
       <html>
@@ -33,38 +27,43 @@ app.post('/generate', async (req, res) => {
             height: ${document.height || 628}px;
             margin: 0;
             padding: 0;
-            background-color: ${background.color || '#ffffff'};
+            background-color: ${document.background_color || '#ffffff'};
             position: relative;
           }
           .name_text {
             position: absolute;
-            left: 50px;
-            top: 100px;
-            font: bold 32px Arial;
-            color: #333;
-          }
-          .website_text {
-            position: absolute;
-            left: 50px;
-            top: 140px;
-            font: 18px Arial;
-            color: #666;
+            left: ${name_text.x || 50}px;
+            top: ${name_text.y || 100}px;
+            width: ${name_text.width || 200}px;
+            height: ${name_text.height || 50}px;
+            font: bold ${name_text.font_size || 32}px Arial;
+            color: ${name_text.font_color || '#333'};
+            text-align: ${name_text.align?.toLowerCase() || 'left'};
           }
           .content_text {
             position: absolute;
-            left: 50px;
-            top: 180px;
-            font: bold 24px Arial;
-            color: #333;
+            left: ${content_text.x || 50}px;
+            top: ${content_text.y || 180}px;
+            width: ${content_text.width || 600}px;
+            height: ${content_text.height || 200}px;
+            font: ${content_text.font_size || 24}px Arial;
+            color: ${content_text.font_color || '#333'};
           }
-          /* Add more styles for images, borders, etc., as needed */
+          .website_text {
+            position: absolute;
+            left: ${website_text.x || 50}px;
+            top: ${website_text.y || 140}px;
+            width: ${website_text.width || 250}px;
+            height: ${website_text.height || 30}px;
+            font: ${website_text.font_size || 18}px Arial;
+            color: ${website_text.font_color || '#666'};
+          }
         </style>
       </head>
       <body>
-        <div class="name_text">${name_text}</div>
-        <div class="content_text">${content_text}</div>
-        <div class="website_text">${website_text}</div>
-        <!-- Add image elements if data includes them -->
+        <div class="name_text">${name_text.text || ''}</div>
+        <div class="content_text">${content_text.text || ''}</div>
+        <div class="website_text">${website_text.text || ''}</div>
       </body>
       </html>
     `;

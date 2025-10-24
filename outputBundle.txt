@@ -1,0 +1,38 @@
+[
+    {
+        "statusCode": 200,
+        "headers": [
+            {
+                "name": "date",
+                "value": "Fri, 24 Oct 2025 01:11:51 GMT"
+            },
+            {
+                "name": "content-length",
+                "value": "0"
+            },
+            {
+                "name": "connection",
+                "value": "keep-alive"
+            },
+            {
+                "name": "cf-ray",
+                "value": "99359a414bc0c9a0-IAD"
+            },
+            {
+                "name": "cf-cache-status",
+                "value": "DYNAMIC"
+            },
+            {
+                "name": "server",
+                "value": "cloudflare"
+            },
+            {
+                "name": "alt-svc",
+                "value": "h3=\":443\"; ma=86400"
+            }
+        ],
+        "cookieHeaders": [],
+        "data": "IMTBuffer(0, binary, da39a3ee5e6b4b0d3255bfef95601890afd80709): ",
+        "fileSize": 0
+    }
+]
