@@ -2,7 +2,7 @@
   "name": "template-designer",
   "version": "1.0.0",
   "description": "Template Designer App",
-  "author": "Your Name",
+  "author": "Tracy Cannon",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

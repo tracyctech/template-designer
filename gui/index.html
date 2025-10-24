@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Template Designer</title>
+<style>
+body{font-family:Segoe UI,sans-serif;height:100vh;margin:0;padding:0}
+.toolbar{background:#2d2d30;color:white;padding:10px 20px;display:flex;gap:10px;align-items:center;height:50px}
+.toolbar button{background:#0078d4;color:white;border:none;padding:8px 16px;border-radius:4px;cursor:pointer}
+.toolbar button:hover{background:#106ebe}
+.add-btn{background:#28a745 !important}
+.main{display:flex;height:calc(100vh - 50px)}
+.canvas-panel{flex:1;position:relative;background:#f0f0f0;display:flex;align-items:center;justify-content:center}
+#canvas{width:1200px;height:628px;background:white;border:2px solid #ccc;cursor:crosshair}
+.properties{width:350px;background:#f9f9f9;overflow-y:auto;border-left:2px solid #ddd;padding:10px}
+#status{padding:10px;background:#e3f2fd;font-weight:bold;text-align:center;color:#1976d2;margin-bottom:10px}
+.prop-section{padding:15px;background:white;margin:5px 0;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+.prop-group{margin:12px 0}
+.prop-group label{display:block;margin-bottom:5px;font-weight:500;font-size:14px}
+input,select,textarea{width:100%;padding:6px;border:1px solid #ddd;border-radius:3px;font-size:14px}
+input[type=color]{height:35px;padding:2px}
+textarea{resize:vertical;min-height:60px}
+h3{margin:0 0 15px 0;color:#333}
+#elementList div:hover { background: #f0f8ff !important; }
+</style>
+</head>
+<body>
+<!-- FIXED TOOLBAR - WORKING BUTTONS -->
+<div class="toolbar">
+  <button onclick="newTemplate()">New</button>
+  <button onclick="openTemplate()">Open</button>
+  <button onclick="saveTemplate()">Save</button>
+  <span style="margin-left:auto"></span>
+  <button class="add-btn" onclick="addElement('name_text')">Name</button>
+  <button class="add-btn" onclick="addElement('content_text')">Content</button>
+  <button class="add-btn" onclick="addElement('website_text')">Website</button>
+  <button class="add-btn" onclick="addElement('content_image')">Image</button>
+  <button class="add-btn" onclick="addElement('logo_image')">Logo</button>
+</div>
+
+<div class="main">
+  <div class="canvas-panel">
+    <canvas id="canvas"></canvas>
+  </div>
+  <div class="properties">
+    <div id="status">Click Add buttons to start designing!</div>
+    <div id="properties"></div>
+  </div>
+</div>
+
+<script src="renderer.js"></script>
+</body>
+</html>
