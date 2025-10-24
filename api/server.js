@@ -11,7 +11,7 @@ app.use('/images', express.static('images'));
 if (!fs.existsSync('images')) fs.mkdirSync('images');
 
 // ALL YOUR FIELDS SUPPORTED
-app.post('/api/generate', async (req, res) => {  // Changed to /api/generate
+app.post('/generate', async (req, res) => {  // Ensure route matches /generate
   try {
     const { document = {}, elements = {} } = req.body;
     const { name_text = {}, content_text = {}, website_text = {} } = elements;
@@ -68,8 +68,10 @@ app.post('/api/generate', async (req, res) => {  // Changed to /api/generate
       </html>
     `;
 
-    // Launch Puppeteer and generate PNG
-    const browser = await puppeteer.launch();
+    // Launch Puppeteer with Render-compatible args
+    const browser = await puppeteer.launch({
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+    });
     const page = await browser.newPage();
     await page.setContent(html);
     await page.setViewport({ width: document.width || 1200, height: document.height || 628 });
